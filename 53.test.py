@@ -1,46 +1,31 @@
-def merge_sort(array):
-    # Base case: If the array has 1 or no elements, it is already sorted
-    if len(array) <= 1:
-        return array
-
-    # Find the middle point and divide the array into two halves
-    middle = len(array) // 2
-    left_half = merge_sort(array[:middle])
-    right_half = merge_sort(array[middle:])
-
-    # Merge the two sorted halves
-    return merge(left_half, right_half)
+def quicksort(A, start, end):
+    if start < end:
+        # Partition the array and get the pivot index
+        p = partition(A, start, end)
+        # Recursively sort elements before and after the pivot
+        quicksort(A, start, p - 1)
+        quicksort(A, p + 1, end)
 
 
-def merge(left, right):
-    result = []  # Resultant array
-    left_index = 0
-    right_index = 0
+def partition(A, start, end):
+    pivot = A[start]  # The pivot is the first element
+    i = start + 1  # Start from the second element
 
-    # Merge while both arrays have elements
-    while left_index < len(left) and right_index < len(right):
-        if left[left_index] <= right[right_index]:
-            result.append(left[left_index])
-            left_index += 1
-        else:
-            result.append(right[right_index])
-            right_index += 1
+    # Iterate through the array from start+1 to end
+    for j in range(start + 1, end + 1):
+        if A[j] < pivot:
+            # Swap elements smaller than the pivot
+            A[i], A[j] = A[j], A[i]
+            i += 1  # Increment index for smaller elements
 
-    # Append any remaining elements from the left array
-    while left_index < len(left):
-        result.append(left[left_index])
-        left_index += 1
+    # Place the pivot in its correct position
+    A[start], A[i - 1] = A[i - 1], A[start]
 
-    # Append any remaining elements from the right array
-    while right_index < len(right):
-        result.append(right[right_index])
-        right_index += 1
-
-    return result
+    return i - 1  # Return the new index of the pivot
 
 
 # Example usage
-arr = [38, 27, 43, 3, 9, 82, 10]
+arr = [6, 3, 7, 1, 2, 5, 9, 20, 32, 12, 32, 23, 54, 45, 65, 56, 76, 14, 32]
 print("Original array:", arr)
-sorted_array = merge_sort(arr)
-print("Sorted array:", sorted_array)
+quicksort(arr, 0, len(arr) - 1)
+print("Sorted array:", arr)
