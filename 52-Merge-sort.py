@@ -1,39 +1,41 @@
 def merge_sort(arr):
-    # Base case: if the array has 1 or 0 elements, it is already sorted
-    if len(arr) <= 1:
+    l = len(arr)
+
+    if l <= 1:
         return arr
 
-    # Split the array into two halves
-    mid = len(arr) // 2
+    mid = l // 2
     left_half = merge_sort(arr[:mid])
     right_half = merge_sort(arr[mid:])
 
-    # Merge the two sorted halves
     return merge(left_half, right_half)
 
 
 def merge(left, right):
-    sorted_array = []
-    i = j = 0
+    result = []
+    left_index = 0
+    right_index = 0
 
-    # Compare elements from both halves and merge them in sorted order
-    while i < len(left) and j < len(right):
-        if left[i] < right[j]:
-            sorted_array.append(left[i])
-            i += 1
+    while left_index < len(left) and right_index < len(right):
+        if left[left_index] <= right[right_index]:
+            result.append(left[left_index])
+            left_index += 1
         else:
-            sorted_array.append(right[j])
-            j += 1
+            result.append(right[right_index])
+            right_index += 1
 
-    # Add the remaining elements from both halves
-    sorted_array.extend(left[i:])
-    sorted_array.extend(right[j:])
+    while left_index < len(left):
+        result.append(left[left_index])
+        left_index += 1
 
-    return sorted_array
+    while right_index < len(right):
+        result.append(right[right_index])
+        right_index += 1
+
+    return result
 
 
-# Test the merge_sort function
-arr = [12, 11, 13, 5, 6, 7]
-print("Original array:", arr)
-sorted_arr = merge_sort(arr)
-print("Sorted array:", sorted_arr)
+arr = [6, 3, 7, 1, 2, 5, 9, 20, 32, 12, 32, 23, 54, 45, 65, 56, 76, 14, 32]
+print(arr)
+srt = merge_sort(arr)
+print(srt)
