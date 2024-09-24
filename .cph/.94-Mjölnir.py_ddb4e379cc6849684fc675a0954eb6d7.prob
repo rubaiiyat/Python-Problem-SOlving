@@ -1,0 +1,1 @@
+{"name":"Local: 94-Mjölnir","url":"e:\\Python Problem Solving\\94-Mjölnir.py","tests":[{"id":1727188532901,"input":"4\nHulk 5000\nTony 1000\nThor 50\nSteve 500","output":"N\nN\nY\nN"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\Python Problem Solving\\94-Mjölnir.py","group":"local","local":true}
